@@ -71,7 +71,7 @@ export function getDataType(value) {
 // getDataType({})
 
 export function isValidParcelWeight(weight) {
-  if(Number.isFinite(weight) || Number.isNaN(weight) || !Number.isInteger(weight) || weight <= 0){
+  if(!Number.isFinite(weight) || Number.isNaN(weight) || weight <= 0){
     return false
   }
 

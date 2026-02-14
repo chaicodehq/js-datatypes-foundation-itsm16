@@ -52,21 +52,20 @@
  *   countVowels("Namaste")     // => 3
  */
 export function writePostcard(sender, receiver, message) {
-  if(!sender || !receiver || !message || typeof message !== "string"){
+  if (typeof sender !== "string" || typeof receiver !== "string" || typeof message !== "string") {
     return ""
   }
 
-  if(sender.trim==="" || receiver.trim() === "" || message.trim() === ""){
+  if (sender.trim() === "" || receiver.trim() === "" || message.trim() === "") {
     return ""
   }
 
-  let letter = `Hey ${receiver}, you have a message:${message}, from ${sender}`
-
-  return letter
+  return `Hey ${receiver}, you have a message: ${message}, from ${sender}`
 }
 
+
 export function isValidPincode(code) {
-  if(code.startsWith(0) || code.length !== 6 || typeof code !== "string" || !Number.isInteger(parseInt(code)) ){
+  if(code.startsWith("0") || code.length !== 6 || typeof code !== "string" || !Number.isInteger(parseInt(code)) ){
     return false
   }
 

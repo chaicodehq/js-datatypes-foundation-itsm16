@@ -93,7 +93,12 @@ export function sortByPrice(items, ascending) {
     return []
   }
 
-  return [...items].sort()
+let newItems = [...items]
+
+return newItems.sort((a, b) =>
+  ascending ? a.price - b.price : b.price - a.price
+)
+// arrange in order
 }
 
 export function formatBill(items) {

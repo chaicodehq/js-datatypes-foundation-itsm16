@@ -60,22 +60,21 @@ export function repeatPattern(pattern, times) {
 }
 
 export function extractRangoliCenter(design, start, end) {
-
-  if(typeof design !== "string"){
-    return ""
-  }
-  
-  if (!design || !start || !end){
+  if (typeof design !== "string") {
     return ""
   }
 
-  if(!Number.isInteger(start) || !Number.isInteger(start)){
+  if (!Number.isInteger(start) || !Number.isInteger(end)) {
     return ""
   }
 
-  console.log(design.slice(start, end))
+  if (start < 0 || end < 0 || start > end) {
+    return ""
+  }
+
   return design.slice(start, end)
 }
+
 
 extractRangoliCenter("***LOTUS***", 3, 8)
 

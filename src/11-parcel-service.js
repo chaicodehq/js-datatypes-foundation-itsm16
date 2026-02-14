@@ -71,9 +71,14 @@ export function jsonToParcel(jsonString) {
 
   try {
     let obj = JSON.parse(jsonString)
+
     return obj
+
+    // nullish coalescing op
+    // return obj ?? null
+    // checks if null / undef on left else use right val
   } catch (error) {
-    return ""
+    return null
   }
 }
 

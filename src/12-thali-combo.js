@@ -131,7 +131,7 @@ export function generateThaliReceipt(customerName, thalis) {
 
   customerName = customerName.toUpperCase()
 
-  let lineItems = thalis.map(ele => `${ele.name} x Rs.${ele.price}`)
+  let lineItems = thalis.map(ele => `- ${ele.name} x Rs.${ele.price}`)
   lineItems = lineItems.join("\n")
   let total = thalis.reduce((acc, ele) => acc += ele.price, 0)
   let count = thalis.length

@@ -52,22 +52,22 @@
  */
 export function parseFare(fareString) {
   
-  if(!fareString || fareString !== "string"){
+  if(typeof fareString !== "string"){
     return -1
   }
   
   fareString = parseFloat(fareString)
   
-  if(typeof parseFloat(fareString) !== "number"){
+  if(Number.isNaN(fareString)){
     return -1
   }
   
   console.log(Number.isInteger(fareString))
 
   if(Number.isInteger(fareString)){
-    return parseInt(fareString).toFixed(2)
+    return Number(parseInt(fareString).toFixed(2))
   }else{
-    return parseFloat(fareString).toFixed(2)
+    return Number(parseFloat(fareString).toFixed(2))
   }
 }
 

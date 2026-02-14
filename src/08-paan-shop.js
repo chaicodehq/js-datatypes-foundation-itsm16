@@ -71,7 +71,9 @@ export function freezeMenu(menu) {
 }
 
 export function updatePrices(menu, increase) {
-  if(!menu || !increase || typeof menu !== "object" || !Number.isInteger(increase)){
+  if(!menu || typeof menu !== "object" || !Number.isInteger(increase)){
+    // can't use !increase , won't work for 0
+    //  increase < 0 didn't work
     return {}
   }
 

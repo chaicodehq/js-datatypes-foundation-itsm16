@@ -95,18 +95,14 @@ export function isInCart(cart, item) {
 }
 
 export function mergeCarts(cart1, cart2) {
-  if(!cart1 || !Array.isArray(cart1)){
+  if (!Array.isArray(cart1)) {
     cart1 = []
-    cart1.concat(cart2)
-
-    return cart1
   }
 
-  if(!cart2 || !Array.isArray(cart2)){
+  if (!Array.isArray(cart2)) {
     cart2 = []
-    cart2.concat(cart1)
-
-    return cart2
   }
 
+  return cart1.concat(cart2)
 }
+
