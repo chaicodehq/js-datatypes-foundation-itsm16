@@ -51,21 +51,71 @@
  *   formatBill([{name:"Atta",price:40,qty:2}]) // => "Atta x 2 = Rs.80"
  */
 export function getItemNames(items) {
-  // Your code here
-}
+  if(!Array.isArray(items)){
+    return []
+  }
 
+  let itemNames = items.map(ele => ele.name)
+  // console.log(itemNames)
+  return itemNames  
+}
+// getItemNames([{name:"Atta",price:40},{name:"Ghee",price:500}])
+// using map gives(returns) new val, returns without condition too (like above), func on each 
+
+//  filter works on condition
 export function getAffordableItems(items, maxPrice) {
-  // Your code here
+  if(!Array.isArray(items) || !Number.isInteger(maxPrice)){
+    return []
+  }
+
+  let filtered = items.filter(ele => ele.price <= maxPrice)
+  
+  return filtered
 }
 
 export function calculateTotal(items) {
-  // Your code here
+  if(!Array.isArray(items) || items.length <= 0){
+    return 0
+  }
+
+  let sum = items.reduce((prev, cur) => 
+    prev += cur.price * cur.qty, 0 )
+    // prev => previous returned value after performing the function
+    // 0 is initial value to give a start , accumulator is 0
+
+  return sum
 }
 
+calculateTotal([{name:"a",price:80,qty:1}, {name:"b",price:80,qty:1}])
+
 export function sortByPrice(items, ascending) {
-  // Your code here
+    if(!Array.isArray(items) || items.length <= 0){
+    return []
+  }
+
+  return [...items].sort()
 }
 
 export function formatBill(items) {
-  // Your code here
+  if(!Array.isArray(items) || items.length <= 0){
+    return ""
+  }
+
+  let bill = items.map(ele => {
+    let total = ele.price * ele.qty
+    let str= `${ele.name} x ${ele.qty} = Rs.${total}`
+
+    // ele = str
+    // doens't work
+
+    return str
+    // "return" - that'll add the returned element in arr
+  })
+
+  bill = bill.join("\n")
+  // change separator with \n and update the bill (store it in bill)
+
+  return bill
 }
+
+formatBill([{name:"Ghee",price:500, qty:2},{name:"Atta",price:40, qty:3}])

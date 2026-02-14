@@ -58,21 +58,50 @@
  *   isTruthy("")                 // => false
  */
 export function getDataType(value) {
-  // Your code here
+  if(Array.isArray(value)) return "array"
+
+  if(value === null) return "null"
+
+  return typeof value
+  // null - object
+  // array - object
+  // obj { } - object
+  
 }
+// getDataType({})
 
 export function isValidParcelWeight(weight) {
-  // Your code here
+  if(Number.isFinite(weight) || Number.isNaN(weight) || !Number.isInteger(weight) || weight <= 0){
+    return false
+  }
+
+  return true
 }
 
 export function isWholeNumber(value) {
-  // Your code here
+  if(Number.isInteger(value)) return true
+
+  if(Number.isFinite(value) || Number.isNaN(value) || !Number.isInteger(value) || value <= 0){
+    return false
+  }
+
 }
 
 export function isNotANumber(value) {
-  // Your code here
+  if(Number.isNaN(value) ) return true
+
+  if(Number.isFinite(value) || !Number.isInteger(value) || value <= 0){
+    return false
+  }
+
+
+
+  // - Number.isNaN("hello") => false (string hai, NaN nahi)
+  // - isNaN("hello") => true (pehle convert karta hai)
 }
 
 export function isTruthy(value) {
-  // Your code here
+//   *- JS mein Falsy values: false, 0, "", null, undefined, NaN
+//  *- Sab kuch aur truthy hai (including [], {}, "0", "false")!
+return Boolean(value)
 }

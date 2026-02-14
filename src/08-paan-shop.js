@@ -46,17 +46,58 @@
  *   updatePrices({meetha:30, saada:20}, 10)              // => {meetha:40, saada:30}
  */
 export function createPaanOrder(basePaan, customizations) {
-  // Your code here
+  if(!basePaan || basePaan === null || typeof basePaan !== "object"){
+    return {}
+  }
+
+  if(typeof customizations !== "object"){
+    return Object.assign({}, basePaan)
+
+    // return {...basePaan}
+    // copy of pan
+  }
+
+  return Object.assign({}, basePaan, customizations)
 }
 
+// createPaanOrder({type:"meetha",price:30})
+
 export function freezeMenu(menu) {
-  // Your code here
+    if(!menu || menu === null || typeof menu !== "object"){
+    return {}
+  }
+  
+  return Object.freeze(menu)
 }
 
 export function updatePrices(menu, increase) {
-  // Your code here
+  if(!menu || !increase || typeof menu !== "object" || !Number.isInteger(increase)){
+    return {}
+  }
+
+  let entries = Object.entries(menu)
+  // [ [ 'meetha', 30 ], [ 'saada', 20 ] ]
+  let newEntries = entries.map(ele => [ele[0], ele[1] + increase])
+  // [ [ 'meetha', 40 ], [ 'saada', 30 ] ]
+
+  let newObject = Object.fromEntries(newEntries)
+  // create object again from entries { meetha: 40, saada: 30 }
+  return newObject
 }
+// updatePrices({meetha:30, saada:20}, 10)
 
 export function mergeDailySpecials(regularMenu, specialsMenu) {
-  // Your code here
+  if(typeof regularMenu !== "object" || typeof specialsMenu !== "object"){
+    return {}
+  }
+
+  if(!regularMenu){
+    regularMenu = {}
+  }
+
+  if(!specialsMenu){
+    specialsMenu = {}
+  }
+
+  return {...regularMenu, ...specialsMenu}
 }

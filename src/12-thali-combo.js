@@ -53,17 +53,89 @@
  *   // => "RAJASTHANI THALI (Veg) - Items: dal - Rs.250.00"
  */
 export function createThaliDescription(thali) {
-  // Your code here
+
+  if(!thali || !thali.name || thali.isVeg === undefined || !thali.price || typeof thali !== "object"){
+    // !thali.isVeg - if isVeg is false it'll return "", so we check for undefined
+    return ""
+  }
+
+  // let type = thali.isVeg ? "Veg" : "Non-Veg";
+  let type = "Veg";
+  if (!thali.isVeg) type = "Non-Veg";
+
+  let str = `${thali.name.toUpperCase()} (${type}) - Items: ${thali.items.join(", ")} - Rs.${thali.price.toFixed(2)}`
+  // .join give in string from array
+
+  console.log(str)
+  return str
 }
 
 export function getThaliStats(thalis) {
-  // Your code here
+  if(!thalis || thalis.length <= 0 || !Array.isArray(thalis)){
+    return null
+  }
+
+  let vegCount = thalis.filter(ele => ele.isVeg).length
+  let nonVegCount = thalis.filter(ele => !ele.isVeg).length
+
+  let total = thalis.reduce((acc, ele)=> acc +=ele.price, 0)
+  // initializer 0 , is necessary, acc starts as 0 
+  //  else accumulator is the whole first obj
+  let avgPrice = total/thalis.length
+  avgPrice = avgPrice.toFixed(2)
+
+  let names = thalis.map(ele => ele.name)
+
+  let prices = thalis.map(ele => ele.price)
+  let cheapest = Math.min(...prices)
+  //use ... , this wouldn't have worked let cheapest = Math.min(prices)
+  let costliest = Math.max(...prices)
+  let totalThalis = thalis.length
+  return {totalThalis , vegCount, nonVegCount, avgPrice, cheapest, costliest, names }
 }
 
 export function searchThaliMenu(thalis, query) {
-  // Your code here
+  if(!Array.isArray(thalis) || typeof query !== "string"){
+    return []
+  }
+
+  if(typeof query !== "string" || !Array.isArray(thalis)){
+    return []
+  }
+
+  let thali = thalis.filter(ele=> {
+    if(ele.name.toLowerCase().includes(query.toLowerCase())){
+      return ele
+    }
+
+    let itemStr = ele.items.join(", ")
+    if(itemStr.toLowerCase().includes(query.toLowerCase())){
+      return ele
+    }
+
+  })
+
+  if(!thali || thali.length <=0){
+    return []
+  }
+
+  return thali
 }
+// searchThaliMenu([{name:"Rajasthani Thali", items:["dal","churma"], price:250, isVeg:true}, {name:"Kpr Thali", items:["",""], price:250, isVeg:true}], "kpr")
+
 
 export function generateThaliReceipt(customerName, thalis) {
-  // Your code here
+  if(!customerName || typeof customerName !== "string" || thalis.length <= 0 || !Array.isArray(thalis)){
+    return ""
+  }
+
+  customerName = customerName.toUpperCase()
+
+  let lineItems = thalis.map(ele => `${ele.name} x Rs.${ele.price}`)
+  lineItems = lineItems.join("\n")
+  let total = thalis.reduce((acc, ele) => acc += ele.price, 0)
+  let count = thalis.length
+
+  let format = `THALI RECEIPT\n---\nCustomer: ${customerName}\n${lineItems}\n---\nTotal: Rs.${total}\nItems: ${count}`
+  return format
 }
